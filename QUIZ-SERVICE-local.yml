@@ -1,3 +1,6 @@
+spring:
+  application:
+    name: QUIZ-SERVICE1
 eureka:
   instance:
     prefer-ip-address: true

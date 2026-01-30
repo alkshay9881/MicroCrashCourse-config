@@ -1,6 +1,6 @@
 spring:
   application:
-    name: QUIZ-SERVICE111
+    name: QUIZ-SERVICE
 eureka:
   instance:
     prefer-ip-address: true

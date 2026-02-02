@@ -1,1 +1,35 @@
+server:
+  port: 8080
 
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: quiz-service
+          uri: lb://QUIZ-SERVICE
+          predicates:
+            - Path=/api/quizzes/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: quizServiceCB
+                fallbackUri: forward:/fallback/quiz
+        - id: question-service
+          uri: lb://QUESTIONS-SERVICE
+          predicates:
+            - Path=/api/questions/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: questionServiceCB
+                fallbackUri: forward:/fallback/question
+
+  config:
+    import: "optional:configserver:http://config-server:8087"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true

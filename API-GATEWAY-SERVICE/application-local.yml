@@ -14,7 +14,7 @@ spring:
               args:
                 name: quizServiceCB
                 fallbackUri: forward:/fallback/quiz
-        - id: question-service
+        - id: questions-service
           uri: lb://QUESTIONS-SERVICE
           predicates:
             - Path=/api/questions/**
